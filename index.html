@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Habit Calculator - Test</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 50px;
+    }
+    input {
+      padding: 8px;
+      margin: 5px;
+      width: 100px;
+    }
+    button {
+      padding: 8px 16px;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Test Calculator (a + b)</h1>
+
+  <input type="number" id="a" placeholder="Enter a">
+  <input type="number" id="b" placeholder="Enter b">
+  <br>
+  <button onclick="calculate()">Add</button>
+
+  <h2 id="result"></h2>
+
+  <script>
+    function calculate() {
+      var a = parseFloat(document.getElementById("a").value) || 0;
+      var b = parseFloat(document.getElementById("b").value) || 0;
+      document.getElementById("result").innerText = "Result: " + (a + b);
+    }
+  </script>
+
+</body>
+</html>
