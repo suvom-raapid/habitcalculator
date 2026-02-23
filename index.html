@@ -249,13 +249,29 @@
   <script src="js/currency.js"></script>
   <script src="js/main.js"></script>
   <script>
-    // Hero counter functionality
+    // Hero counter functionality with currency support
     const habits = [
       { amount: 5, label: "Skip your daily coffee ($5)", type: "money" },
       { amount: 0.5, label: "Cancel Netflix ($15/mo)", type: "money" },
       { amount: 80, label: "Save 1g gold daily (~$80)", type: "gold" },
       { amount: 10, label: "Invest $10 daily in S&P 500", type: "money" }
     ];
+
+    function formatMoneyWithCurrency(amountUSD) {
+      // Wait for CurrencyManager to be ready
+      if (window.CurrencyManager && window.CurrencyManager.currentCurrency) {
+        return CurrencyManager.format(amountUSD);
+      }
+      // Fallback formatting
+      if (amountUSD >= 1e6) return '$' + (amountUSD/1e6).toFixed(1) + 'M';
+      if (amountUSD >= 1e3) return '$' + Math.round(amountUSD/1000) + 'K';
+      return '$' + Math.round(amountUSD);
+    }
+
+    function formatGoldWeight(grams) {
+      if (grams >= 1000) return (grams/1000).toFixed(1) + 'kg';
+      return Math.round(grams) + 'g';
+    }
 
     function animateCounter(el, target) {
       el.style.opacity = '0.3';
@@ -271,19 +287,28 @@
       const isGold = h.type === 'gold';
 
       function fmt(years) {
-        if (isGold) return fmtGold(h.amount / 80 * 365 * years); // Convert USD to gold grams
-        return fmtMoney(calcFV(h.amount, years));
+        if (isGold) {
+          // Gold: show weight in grams/kg
+          const goldGramsPerDay = h.amount / 80; // Assuming $80 per gram
+          const totalGrams = goldGramsPerDay * 365 * years;
+          return formatGoldWeight(totalGrams);
+        } else {
+          // Money: calculate compound value and convert to current currency
+          const valueUSD = calcFV(h.amount, years);
+          return formatMoneyWithCurrency(valueUSD);
+        }
       }
 
       animateCounter(document.getElementById('main-counter'), fmt(10));
       document.getElementById('counter-sub').textContent =
-        isGold ? 'Total gold value over 10 years' : 'Over 10 years with 7% annual return';
+        isGold ? 'Total gold accumulated over 10 years' : 'Over 10 years with 7% annual return';
       document.getElementById('t1').textContent = fmt(1);
       document.getElementById('t5').textContent = fmt(5);
       document.getElementById('t10').textContent = fmt(10);
       document.getElementById('t30').textContent = fmt(30);
     }
 
+    // Button click handlers
     document.querySelectorAll('.habit-btn').forEach((btn, i) => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.habit-btn').forEach(b => b.classList.remove('active'));
@@ -292,14 +317,16 @@
       });
     });
 
-    // Initialize counter when currency is ready
+    // Re-calculate when currency changes
     window.addEventListener('currencyChanged', () => {
       const activeIdx = Array.from(document.querySelectorAll('.habit-btn')).findIndex(b => b.classList.contains('active'));
-      updateHeroCounter(activeIdx || 0);
+      updateHeroCounter(activeIdx >= 0 ? activeIdx : 0);
     });
 
-    // Initial load
-    setTimeout(() => updateHeroCounter(0), 500);
+    // Initialize counter after currency manager loads
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => updateHeroCounter(0), 600);
+    });
   </script>
 </body>
 </html>

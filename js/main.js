@@ -33,10 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // Utility functions for currency formatting
 function fmtMoney(n) {
-  if (window.CurrencyManager) {
+  if (window.CurrencyManager && window.CurrencyManager.currentCurrency) {
     return CurrencyManager.format(n);
   }
-  // Fallback
+  // Fallback formatting in USD
   if (n >= 1e6) return '$' + (n/1e6).toFixed(1) + 'M';
   if (n >= 1e3) return '$' + Math.round(n/1000) + 'K';
   return '$' + Math.round(n);
@@ -47,10 +47,12 @@ function fmtGold(n) {
   return Math.round(n) + 'g';
 }
 
-// Financial calculations
+// Financial calculations - Future Value with compound interest
 function calcFV(dailyAmt, years, rate = 0.07) {
   const daily = dailyAmt;
-  const r = rate / 365;
-  const n = years * 365;
+  const r = rate / 365; // Daily interest rate
+  const n = years * 365; // Total number of days
+
+  // Future Value of Annuity formula: FV = PMT * ((1 + r)^n - 1) / r
   return daily * ((Math.pow(1 + r, n) - 1) / r);
 }

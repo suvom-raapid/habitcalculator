@@ -27,22 +27,65 @@ body {
   cursor: none;
 }
 
-/* Custom cursor */
+/* Fallback cursor for when custom cursor is not visible */
+* {
+  cursor: none;
+}
+
+a, button, input, select, .cat-card, .habit-btn {
+  cursor: none !important;
+}
+
+/* Custom cursor - Elegant minimal ring design */
 #cursor {
-  width: 12px; height: 12px;
-  background: var(--gold);
+  width: 24px;
+  height: 24px;
+  border: 1.5px solid var(--gold);
   border-radius: 50%;
   position: fixed;
-  top: 0; left: 0;
+  top: 0;
+  left: 0;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s ease, width 0.2s, height 0.2s, background 0.2s;
+  transition: transform 0.15s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              width 0.3s ease,
+              height 0.3s ease,
+              opacity 0.3s ease,
+              border-color 0.3s ease;
   transform: translate(-50%, -50%);
+  opacity: 0.7;
+  background: rgba(240, 180, 41, 0.03);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 0 20px rgba(240, 180, 41, 0.1);
 }
+
+#cursor::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 5px;
+  height: 5px;
+  background: var(--gold);
+  border-radius: 50%;
+  transition: width 0.3s ease, height 0.3s ease, opacity 0.3s ease;
+  opacity: 0.8;
+}
+
 #cursor.hovered {
-  width: 40px; height: 40px;
-  background: rgba(240,180,41,0.2);
-  border: 1px solid var(--gold);
+  width: 48px;
+  height: 48px;
+  opacity: 1;
+  border-color: var(--gold-light);
+  background: rgba(240, 180, 41, 0.08);
+  box-shadow: 0 0 30px rgba(240, 180, 41, 0.2);
+}
+
+#cursor.hovered::before {
+  width: 8px;
+  height: 8px;
+  opacity: 1;
 }
 
 /* Noise overlay */
