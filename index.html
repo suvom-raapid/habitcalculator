@@ -1,43 +1,120 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Habit Calculator - Test</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    input {
-      padding: 8px;
-      margin: 5px;
-      width: 100px;
-    }
-    button {
-      padding: 8px 16px;
-      margin-top: 10px;
-    }
-  </style>
+  <meta name="description" content="Calculate how much your daily habits cost over time. Discover the true financial impact of coffee, drinks, and other recurring expenses.">
+  <meta name="keywords" content="habit calculator, cost calculator, savings calculator, coffee cost, daily expense calculator">
+  <title>Habit Cost Calculator | Calculate Your Daily Expenses</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">HabitCalc</a>
+        <div class="nav-center">
+          <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="coffee-calculator.html">Coffee Calculator</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+          <div class="currency-selector">
+            <label for="currencySelector">Currency:</label>
+            <select id="currencySelector">
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+              <option value="NZD">NZD - New Zealand Dollar</option>
+              <option value="ZAR">ZAR - South African Rand</option>
+              <option value="BRL">BRL - Brazilian Real</option>
+              <option value="MXN">MXN - Mexican Peso</option>
+              <option value="KRW">KRW - South Korean Won</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
 
-  <h1>Test Calculator (a + b)</h1>
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>Discover the True Cost of Your Daily Habits</h1>
+        <p>Small daily expenses add up to significant amounts over time. Use our calculators to see exactly how much your habits are costing you.</p>
+      </div>
+    </section>
 
-  <input type="number" id="a" placeholder="Enter a">
-  <input type="number" id="b" placeholder="Enter b">
-  <br>
-  <button onclick="calculate()">Add</button>
+    <section class="container">
+      <div class="calculators-grid">
+        <a href="coffee-calculator.html" class="calculator-card">
+          <div class="calculator-icon">☕</div>
+          <h3>Coffee & Drinks</h3>
+          <p>Calculate how much your daily coffee or energy drink habit costs over time. See yearly savings potential.</p>
+        </a>
 
-  <h2 id="result"></h2>
+        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
+          <div class="calculator-icon">🚬</div>
+          <h3>Smoking Calculator</h3>
+          <p>Coming soon - Calculate the cost of smoking and vaping habits over different time periods.</p>
+        </div>
 
-  <script>
-    function calculate() {
-      var a = parseFloat(document.getElementById("a").value) || 0;
-      var b = parseFloat(document.getElementById("b").value) || 0;
-      document.getElementById("result").innerText = "Result: " + (a + b);
-    }
-  </script>
+        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
+          <div class="calculator-icon">📱</div>
+          <h3>Subscriptions</h3>
+          <p>Coming soon - Track and calculate your monthly subscription costs across all services.</p>
+        </div>
 
+        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
+          <div class="calculator-icon">🍔</div>
+          <h3>Fast Food & Takeout</h3>
+          <p>Coming soon - See how much regular dining out and food delivery is costing you.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="container" id="about" style="padding: 3rem 0;">
+      <div class="calculator-container">
+        <h2 style="text-align: center; margin-bottom: 1rem;">Why Use Habit Calculators?</h2>
+        <p style="color: var(--text-secondary); text-align: center; max-width: 700px; margin: 0 auto 2rem;">
+          Understanding the long-term financial impact of daily habits can help you make informed decisions about your spending.
+          Our calculators provide clear, visual breakdowns of how small daily expenses compound over time.
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+          <div style="text-align: center;">
+            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">📊</h3>
+            <h4 style="margin-bottom: 0.5rem;">Clear Projections</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">See costs broken down by day, week, month, year, and 5-year periods.</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">💡</h3>
+            <h4 style="margin-bottom: 0.5rem;">Make Informed Choices</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Understand where your money goes and identify potential savings.</p>
+          </div>
+          <div style="text-align: center;">
+            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">🎯</h3>
+            <h4 style="margin-bottom: 0.5rem;">Set Goals</h4>
+            <p style="color: var(--text-secondary); font-size: 0.95rem;">Use the insights to create realistic savings goals and track progress.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 HabitCalc. All rights reserved.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.875rem;">Calculate smarter, save better.</p>
+    </div>
+  </footer>
+
+  <script src="currency.js"></script>
 </body>
 </html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate how much your daily coffee or energy drink habit costs over time. See weekly, monthly, yearly, and 5-year projections.">
+  <meta name="keywords" content="coffee cost calculator, daily coffee expense, coffee savings calculator, latte factor">
+  <title>Coffee & Drinks Cost Calculator | HabitCalc</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a href="index.html" class="logo">HabitCalc</a>
+        <div class="nav-center">
+          <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="coffee-calculator.html" class="active">Coffee Calculator</a></li>
+            <li><a href="index.html#about">About</a></li>
+          </ul>
+          <div class="currency-selector">
+            <label for="currencySelector">Currency:</label>
+            <select id="currencySelector">
+              <option value="USD">USD - US Dollar</option>
+              <option value="EUR">EUR - Euro</option>
+              <option value="GBP">GBP - British Pound</option>
+              <option value="INR">INR - Indian Rupee</option>
+              <option value="CAD">CAD - Canadian Dollar</option>
+              <option value="AUD">AUD - Australian Dollar</option>
+              <option value="JPY">JPY - Japanese Yen</option>
+              <option value="CNY">CNY - Chinese Yuan</option>
+              <option value="CHF">CHF - Swiss Franc</option>
+              <option value="SGD">SGD - Singapore Dollar</option>
+              <option value="NZD">NZD - New Zealand Dollar</option>
+              <option value="ZAR">ZAR - South African Rand</option>
+              <option value="BRL">BRL - Brazilian Real</option>
+              <option value="MXN">MXN - Mexican Peso</option>
+              <option value="KRW">KRW - South Korean Won</option>
+            </select>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="calculator-container">
+        <div class="calculator-header">
+          <div class="calculator-icon">☕</div>
+          <h1>Coffee & Drinks Calculator</h1>
+          <p>Calculate the true cost of your daily coffee or energy drink habit</p>
+        </div>
+
+        <form id="coffeeForm">
+          <div class="input-group">
+            <label for="drinkType">Type of Drink</label>
+            <select id="drinkType" required>
+              <option value="">Select drink type</option>
+              <option value="coffee">Coffee (Latte, Cappuccino, etc.)</option>
+              <option value="espresso">Espresso Shot</option>
+              <option value="energy">Energy Drink</option>
+              <option value="soda">Soda / Soft Drink</option>
+              <option value="tea">Specialty Tea</option>
+              <option value="custom">Custom Drink</option>
+            </select>
+          </div>
+
+          <div class="input-group">
+            <label for="dailyCost">Cost per Drink <span id="currencyLabel">(USD)</span></label>
+            <div class="input-with-prefix">
+              <span class="input-prefix" id="currencySymbol">$</span>
+              <input
+                type="number"
+                id="dailyCost"
+                placeholder="5.00"
+                step="0.01"
+                min="0.01"
+                required
+              >
+            </div>
+            <small style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.25rem; display: block;">
+              Enter the average cost of one drink in your local currency
+            </small>
+          </div>
+
+          <div class="input-group">
+            <label for="frequency">How many per day?</label>
+            <input
+              type="number"
+              id="frequency"
+              placeholder="1"
+              min="1"
+              max="20"
+              value="1"
+              required
+            >
+          </div>
+
+          <div class="input-group">
+            <label for="daysPerWeek">Days per week</label>
+            <select id="daysPerWeek" required>
+              <option value="7">Every day (7 days)</option>
+              <option value="6">6 days a week</option>
+              <option value="5" selected>Weekdays only (5 days)</option>
+              <option value="4">4 days a week</option>
+              <option value="3">3 days a week</option>
+              <option value="2">2 days a week</option>
+              <option value="1">Once a week</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-block">Calculate My Spending</button>
+        </form>
+
+        <div id="results" class="results">
+          <div class="results-header">
+            <h3>Your Daily Spending</h3>
+            <div class="amount" id="dailyAmount">$0.00</div>
+          </div>
+
+          <h3 style="margin-bottom: 1rem; color: var(--text-primary);">Cost Over Time</h3>
+          <div class="time-projections">
+            <div class="projection-card">
+              <div class="period">Weekly</div>
+              <div class="cost" id="weeklyCost">$0.00</div>
+            </div>
+            <div class="projection-card">
+              <div class="period">Monthly</div>
+              <div class="cost" id="monthlyCost">$0.00</div>
+            </div>
+            <div class="projection-card">
+              <div class="period">Yearly</div>
+              <div class="cost" id="yearlyCost">$0.00</div>
+            </div>
+            <div class="projection-card">
+              <div class="period">5 Years</div>
+              <div class="cost" id="fiveYearCost">$0.00</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%); border-radius: 8px; border-left: 4px solid var(--secondary-color);">
+            <h4 style="color: var(--secondary-color); margin-bottom: 0.5rem;">💰 Savings Opportunity</h4>
+            <p style="color: var(--text-primary); font-size: 0.95rem;">
+              By reducing or eliminating this habit, you could save <strong id="savingsAmount">$0</strong> per year.
+              That's enough for a vacation, emergency fund, or investment opportunity!
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="calculator-container" style="margin-top: 2rem;">
+        <h2 style="margin-bottom: 1rem;">Understanding Your Coffee Costs</h2>
+        <p style="color: var(--text-secondary); line-height: 1.8; margin-bottom: 1rem;">
+          The "latte factor" is a term coined by financial author David Bach, referring to the small, regular purchases
+          we make without thinking that add up to significant amounts over time. A daily $5 coffee might seem insignificant,
+          but over a year, it can cost you over $1,800.
+        </p>
+        <p style="color: var(--text-secondary); line-height: 1.8;">
+          This calculator helps you visualize the true cost of your coffee or drink habit. Use these insights to make
+          informed decisions about your spending. Even small changes, like making coffee at home a few days a week,
+          can lead to substantial savings over time.
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 HabitCalc. All rights reserved.</p>
+      <p style="margin-top: 0.5rem; font-size: 0.875rem;">Calculate smarter, save better.</p>
+    </div>
+  </footer>
+
+  <script src="currency.js"></script>
+  <script>
+    // Store last calculated values for currency conversion
+    let lastCalculation = null;
+
+    function updateCurrencyLabels() {
+      const currencyInfo = CurrencyManager.getCurrentCurrency();
+      document.getElementById('currencySymbol').textContent = currencyInfo.symbol;
+      document.getElementById('currencyLabel').textContent = `(${currencyInfo.code})`;
+    }
+
+    function updateResults() {
+      if (!lastCalculation) return;
+
+      const { dailyAverage, weekly, monthly, yearly, fiveYear } = lastCalculation;
+
+      // Format all amounts using CurrencyManager
+      document.getElementById('dailyAmount').textContent = CurrencyManager.format(dailyAverage);
+      document.getElementById('weeklyCost').textContent = CurrencyManager.format(weekly);
+      document.getElementById('monthlyCost').textContent = CurrencyManager.format(monthly);
+      document.getElementById('yearlyCost').textContent = CurrencyManager.format(yearly);
+      document.getElementById('fiveYearCost').textContent = CurrencyManager.format(fiveYear);
+      document.getElementById('savingsAmount').textContent = CurrencyManager.format(yearly, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    // Listen for currency changes and update results and labels
+    window.addEventListener('currencyChanged', function() {
+      updateCurrencyLabels();
+      updateResults();
+    });
+
+    // Update labels when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(updateCurrencyLabels, 100);
+    });
+
+    document.getElementById('coffeeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const costPerDrink = parseFloat(document.getElementById('dailyCost').value);
+      const frequency = parseInt(document.getElementById('frequency').value);
+      const daysPerWeek = parseInt(document.getElementById('daysPerWeek').value);
+
+      // Calculate daily average (accounting for days per week) - all in USD base
+      const dailyAverage = (costPerDrink * frequency * daysPerWeek) / 7;
+
+      // Calculate projections in USD
+      const weekly = costPerDrink * frequency * daysPerWeek;
+      const monthly = dailyAverage * 30;
+      const yearly = dailyAverage * 365;
+      const fiveYear = yearly * 5;
+
+      // Store calculation for currency conversion
+      lastCalculation = { dailyAverage, weekly, monthly, yearly, fiveYear };
+
+      // Update UI with current currency
+      updateResults();
+
+      // Show results with animation
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.classList.add('show');
+      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Update placeholder based on drink type
+    document.getElementById('drinkType').addEventListener('change', function(e) {
+      const costInput = document.getElementById('dailyCost');
+      const suggestions = {
+        'coffee': '5.00',
+        'espresso': '3.50',
+        'energy': '3.00',
+        'soda': '2.00',
+        'tea': '4.50',
+        'custom': '5.00'
+      };
+      costInput.placeholder = suggestions[e.target.value] || '5.00';
+    });
+  </script>
+</body>
+</html>
