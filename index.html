@@ -12,118 +12,294 @@
 
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Calculate how much your daily habits cost over time. Discover the true financial impact of coffee, drinks, and other recurring expenses.">
-  <meta name="keywords" content="habit calculator, cost calculator, savings calculator, coffee cost, daily expense calculator">
-  <title>Habit Cost Calculator | Calculate Your Daily Expenses</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta name="description" content="Calculate how much your daily habits cost over time. Discover the true financial impact of coffee, savings, and other recurring habits.">
+  <meta name="keywords" content="habit calculator, cost calculator, savings calculator, investment calculator, daily expense calculator">
+  <title>HabitCalculator — Small Habits. Massive Results.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <nav>
-        <a href="index.html" class="logo">HabitCalc</a>
-        <div class="nav-center">
-          <ul class="nav-links">
-            <li><a href="index.html" class="active">Home</a></li>
-            <li><a href="coffee-calculator.html">Coffee Calculator</a></li>
-            <li><a href="#about">About</a></li>
-          </ul>
-          <div class="currency-selector">
-            <label for="currencySelector">Currency:</label>
-            <select id="currencySelector">
-              <option value="USD">USD - US Dollar</option>
-              <option value="EUR">EUR - Euro</option>
-              <option value="GBP">GBP - British Pound</option>
-              <option value="INR">INR - Indian Rupee</option>
-              <option value="CAD">CAD - Canadian Dollar</option>
-              <option value="AUD">AUD - Australian Dollar</option>
-              <option value="JPY">JPY - Japanese Yen</option>
-              <option value="CNY">CNY - Chinese Yuan</option>
-              <option value="CHF">CHF - Swiss Franc</option>
-              <option value="SGD">SGD - Singapore Dollar</option>
-              <option value="NZD">NZD - New Zealand Dollar</option>
-              <option value="ZAR">ZAR - South African Rand</option>
-              <option value="BRL">BRL - Brazilian Real</option>
-              <option value="MXN">MXN - Mexican Peso</option>
-              <option value="KRW">KRW - South Korean Won</option>
-            </select>
-          </div>
-        </div>
-      </nav>
+  <div id="cursor"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html" class="nav-logo">Habit<span>Calculator</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#categories">Categories</a></li>
+        <li><a href="calculators/coffee.html">Coffee</a></li>
+        <li><a href="#how">How It Works</a></li>
+      </ul>
+      <div class="currency-selector">
+        <label for="currencySelector">Currency</label>
+        <select id="currencySelector">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="INR">INR (₹)</option>
+          <option value="CAD">CAD (C$)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="CNY">CNY (¥)</option>
+          <option value="CHF">CHF (Fr)</option>
+          <option value="SGD">SGD (S$)</option>
+          <option value="NZD">NZD (NZ$)</option>
+          <option value="ZAR">ZAR (R)</option>
+          <option value="BRL">BRL (R$)</option>
+          <option value="MXN">MXN (Mex$)</option>
+          <option value="KRW">KRW (₩)</option>
+        </select>
+      </div>
     </div>
-  </header>
+  </nav>
 
-  <main>
-    <section class="hero">
-      <div class="container">
-        <h1>Discover the True Cost of Your Daily Habits</h1>
-        <p>Small daily expenses add up to significant amounts over time. Use our calculators to see exactly how much your habits are costing you.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content fade-up">
+      <div class="hero-eyebrow">Compound the power of tiny habits</div>
+      <h1>
+        Small<br>
+        <span class="line2">Habits.</span>
+        <span class="line3">Massive</span>
+        Results.
+      </h1>
+      <p class="hero-desc">
+        Discover exactly how much your daily habits — savings, investments, lifestyle choices — are truly worth over time.
+      </p>
+
+      <div class="search-bar-wrapper">
+        <span class="search-icon">⌕</span>
+        <input class="search-bar" type="text" placeholder="Search a habit calculator..." id="searchInput" autocomplete="off">
       </div>
-    </section>
 
-    <section class="container">
-      <div class="calculators-grid">
-        <a href="coffee-calculator.html" class="calculator-card">
-          <div class="calculator-icon">☕</div>
-          <h3>Coffee & Drinks</h3>
-          <p>Calculate how much your daily coffee or energy drink habit costs over time. See yearly savings potential.</p>
-        </a>
-
-        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
-          <div class="calculator-icon">🚬</div>
-          <h3>Smoking Calculator</h3>
-          <p>Coming soon - Calculate the cost of smoking and vaping habits over different time periods.</p>
-        </div>
-
-        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
-          <div class="calculator-icon">📱</div>
-          <h3>Subscriptions</h3>
-          <p>Coming soon - Track and calculate your monthly subscription costs across all services.</p>
-        </div>
-
-        <div class="calculator-card" style="opacity: 0.6; cursor: not-allowed;">
-          <div class="calculator-icon">🍔</div>
-          <h3>Fast Food & Takeout</h3>
-          <p>Coming soon - See how much regular dining out and food delivery is costing you.</p>
-        </div>
+      <div class="hero-cta-group" style="margin-top: 28px;">
+        <a href="#categories" class="btn-primary">Explore Calculators</a>
+        <a href="calculators/coffee.html" class="btn-ghost">Coffee Calculator →</a>
       </div>
-    </section>
+    </div>
 
-    <section class="container" id="about" style="padding: 3rem 0;">
-      <div class="calculator-container">
-        <h2 style="text-align: center; margin-bottom: 1rem;">Why Use Habit Calculators?</h2>
-        <p style="color: var(--text-secondary); text-align: center; max-width: 700px; margin: 0 auto 2rem;">
-          Understanding the long-term financial impact of daily habits can help you make informed decisions about your spending.
-          Our calculators provide clear, visual breakdowns of how small daily expenses compound over time.
-        </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
-          <div style="text-align: center;">
-            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">📊</h3>
-            <h4 style="margin-bottom: 0.5rem;">Clear Projections</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem;">See costs broken down by day, week, month, year, and 5-year periods.</p>
+    <div class="hero-counter-panel fade-up" style="transition-delay:0.2s">
+      <div class="counter-card">
+        <div class="counter-label">If you save just...</div>
+        <div class="counter-habit" id="habit-desc">Skip your daily coffee ($5)</div>
+        <div class="counter-number" id="main-counter">$0</div>
+        <div class="counter-sub" id="counter-sub">Over 10 years with 7% annual return</div>
+
+        <div class="counter-controls">
+          <button class="habit-btn active" data-amount="5" data-label="Skip daily coffee ($5)" data-type="money">☕ Coffee</button>
+          <button class="habit-btn" data-amount="0.5" data-label="Cancel Netflix ($15/mo)" data-type="money">📺 Netflix</button>
+          <button class="habit-btn" data-amount="80" data-label="Save 1g gold daily (~$80)" data-type="gold">🥇 1g Gold</button>
+          <button class="habit-btn" data-amount="10" data-label="Invest $10 daily in S&P 500" data-type="money">📈 Invest $10</button>
+        </div>
+
+        <div class="counter-timeline">
+          <div class="timeline-item">
+            <span class="timeline-val" id="t1">—</span>
+            <span class="timeline-key">1 Year</span>
           </div>
-          <div style="text-align: center;">
-            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">💡</h3>
-            <h4 style="margin-bottom: 0.5rem;">Make Informed Choices</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem;">Understand where your money goes and identify potential savings.</p>
+          <div class="timeline-item">
+            <span class="timeline-val" id="t5">—</span>
+            <span class="timeline-key">5 Years</span>
           </div>
-          <div style="text-align: center;">
-            <h3 style="font-size: 2rem; color: var(--primary-color); margin-bottom: 0.5rem;">🎯</h3>
-            <h4 style="margin-bottom: 0.5rem;">Set Goals</h4>
-            <p style="color: var(--text-secondary); font-size: 0.95rem;">Use the insights to create realistic savings goals and track progress.</p>
+          <div class="timeline-item">
+            <span class="timeline-val" id="t10">—</span>
+            <span class="timeline-key">10 Years</span>
+          </div>
+          <div class="timeline-item">
+            <span class="timeline-val" id="t30">—</span>
+            <span class="timeline-key">30 Years</span>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
 
+    <div class="scroll-hint">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE -->
+  <div class="marquee-section">
+    <div class="marquee-track" id="marquee">
+      <span class="marquee-item">💰 Daily Savings Calculator <span>→</span></span>
+      <span class="marquee-item">☕ Coffee Habit Value <span>→</span></span>
+      <span class="marquee-item">🥇 Gold Investment <span>→</span></span>
+      <span class="marquee-item">📺 Subscription Costs <span>→</span></span>
+      <span class="marquee-item">🚬 Quit Smoking Savings <span>→</span></span>
+      <span class="marquee-item">🏃 Fitness Tracker <span>→</span></span>
+      <span class="marquee-item">📱 Tech Upgrades <span>→</span></span>
+      <span class="marquee-item">🍕 Dining Out Calculator <span>→</span></span>
+      <span class="marquee-item">💰 Daily Savings Calculator <span>→</span></span>
+      <span class="marquee-item">☕ Coffee Habit Value <span>→</span></span>
+      <span class="marquee-item">🥇 Gold Investment <span>→</span></span>
+      <span class="marquee-item">📺 Subscription Costs <span>→</span></span>
+      <span class="marquee-item">🚬 Quit Smoking Savings <span>→</span></span>
+      <span class="marquee-item">🏃 Fitness Tracker <span>→</span></span>
+      <span class="marquee-item">📱 Tech Upgrades <span>→</span></span>
+      <span class="marquee-item">🍕 Dining Out Calculator <span>→</span></span>
+    </div>
+  </div>
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+    <div class="section-header">
+      <div>
+        <div class="section-tag">Browse by Category</div>
+        <div class="section-title">What habit do<br>you want to calculate?</div>
+      </div>
+      <div class="section-count">06</div>
+    </div>
+    <div class="categories-grid">
+      <a href="calculators/coffee.html" class="cat-card fade-up">
+        <div class="cat-icon-bg">💰</div>
+        <div class="cat-tag">Spending</div>
+        <div class="cat-title">Money & Savings</div>
+        <p class="cat-desc">From coffee runs to subscription services — see how small spending habits compound over decades.</p>
+        <div class="cat-count">Coffee Calculator Available →</div>
+        <div class="cat-arrow">↗</div>
+      </a>
+      <div class="cat-card fade-up" style="transition-delay:0.1s; opacity: 0.6">
+        <div class="cat-icon-bg">📈</div>
+        <div class="cat-tag">Wealth</div>
+        <div class="cat-title">Investing & Growth</div>
+        <p class="cat-desc">Gold, stocks, crypto, real estate. Discover what daily micro-investments are worth long-term.</p>
+        <div class="cat-count">Coming Soon</div>
+        <div class="cat-arrow">↗</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.2s; opacity: 0.6">
+        <div class="cat-icon-bg">🏃</div>
+        <div class="cat-tag">Health</div>
+        <div class="cat-title">Health & Fitness</div>
+        <p class="cat-desc">Steps walked, calories burned, workouts completed — quantify the lifetime value of your health habits.</p>
+        <div class="cat-count">Coming Soon</div>
+        <div class="cat-arrow">↗</div>
+      </div>
+      <div class="cat-card fade-up; opacity: 0.6">
+        <div class="cat-icon-bg">🚫</div>
+        <div class="cat-tag">Quitting</div>
+        <div class="cat-title">Bad Habits to Break</div>
+        <p class="cat-desc">Smoking, drinking, junk food — calculate exactly what you save in money and years of life.</p>
+        <div class="cat-count">Coming Soon</div>
+        <div class="cat-arrow">↗</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.1s; opacity: 0.6">
+        <div class="cat-icon-bg">⏰</div>
+        <div class="cat-tag">Productivity</div>
+        <div class="cat-title">Time & Productivity</div>
+        <p class="cat-desc">If you learn for 30 mins a day, read 10 pages, or practice a skill — how far do you go in a year?</p>
+        <div class="cat-count">Coming Soon</div>
+        <div class="cat-arrow">↗</div>
+      </div>
+      <div class="cat-card fade-up" style="transition-delay:0.2s; opacity: 0.6">
+        <div class="cat-icon-bg">🌱</div>
+        <div class="cat-tag">Lifestyle</div>
+        <div class="cat-title">Lifestyle & Eco</div>
+        <p class="cat-desc">Your carbon footprint, water savings, energy use. How your daily choices shape the bigger picture.</p>
+        <div class="cat-count">Coming Soon</div>
+        <div class="cat-arrow">↗</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section class="section" id="how" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div style="text-align: center; max-width: 800px; margin: 0 auto 60px;">
+      <div class="section-tag">Simple as 1-2-3</div>
+      <div class="section-title">How It Works</div>
+    </div>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 32px; max-width: 1000px; margin: 0 auto;">
+      <div style="background: var(--bg); padding: 32px; border: 1px solid var(--border);" class="fade-up">
+        <span style="font-size: 48px; display: block; margin-bottom: 16px;">🔍</span>
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-bottom: 12px;">Pick a Habit</h3>
+        <p style="color: var(--muted); font-style: italic; font-size: 15px; line-height: 1.6;">Browse calculators for savings, spending, fitness, or lifestyle habits.</p>
+      </div>
+      <div style="background: var(--bg); padding: 32px; border: 1px solid var(--border);" class="fade-up">
+        <span style="font-size: 48px; display: block; margin-bottom: 16px;">🎛️</span>
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-bottom: 12px;">Set Your Numbers</h3>
+        <p style="color: var(--muted); font-style: italic; font-size: 15px; line-height: 1.6;">Adjust daily amount, time horizon, and currency to match your situation.</p>
+      </div>
+      <div style="background: var(--bg); padding: 32px; border: 1px solid var(--border);" class="fade-up">
+        <span style="font-size: 48px; display: block; margin-bottom: 16px;">📊</span>
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-bottom: 12px;">See the Impact</h3>
+        <p style="color: var(--muted); font-style: italic; font-size: 15px; line-height: 1.6;">Instantly see projections showing the full compounded value over time.</p>
+      </div>
+      <div style="background: var(--bg); padding: 32px; border: 1px solid var(--border);" class="fade-up">
+        <span style="font-size: 48px; display: block; margin-bottom: 16px;">🚀</span>
+        <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; margin-bottom: 12px;">Change Your Habits</h3>
+        <p style="color: var(--muted); font-style: italic; font-size: 15px; line-height: 1.6;">Make smarter daily decisions. Even $1 a day adds up to something extraordinary.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <div class="container">
-      <p>&copy; 2026 HabitCalc. All rights reserved.</p>
-      <p style="margin-top: 0.5rem; font-size: 0.875rem;">Calculate smarter, save better.</p>
-    </div>
+    <div class="footer-logo">Habit<span>Calculator</span></div>
+    <p class="footer-copy">© 2026 HabitCalculator — Every day counts.</p>
+    <ul class="footer-links">
+      <li><a href="#categories">Calculators</a></li>
+      <li><a href="#how">How It Works</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
   </footer>
 
-  <script src="currency.js"></script>
+  <script src="js/currency.js"></script>
+  <script src="js/main.js"></script>
+  <script>
+    // Hero counter functionality
+    const habits = [
+      { amount: 5, label: "Skip your daily coffee ($5)", type: "money" },
+      { amount: 0.5, label: "Cancel Netflix ($15/mo)", type: "money" },
+      { amount: 80, label: "Save 1g gold daily (~$80)", type: "gold" },
+      { amount: 10, label: "Invest $10 daily in S&P 500", type: "money" }
+    ];
+
+    function animateCounter(el, target) {
+      el.style.opacity = '0.3';
+      setTimeout(() => {
+        el.textContent = target;
+        el.style.opacity = '1';
+      }, 200);
+    }
+
+    function updateHeroCounter(idx) {
+      const h = habits[idx];
+      document.getElementById('habit-desc').textContent = h.label;
+      const isGold = h.type === 'gold';
+
+      function fmt(years) {
+        if (isGold) return fmtGold(h.amount / 80 * 365 * years); // Convert USD to gold grams
+        return fmtMoney(calcFV(h.amount, years));
+      }
+
+      animateCounter(document.getElementById('main-counter'), fmt(10));
+      document.getElementById('counter-sub').textContent =
+        isGold ? 'Total gold value over 10 years' : 'Over 10 years with 7% annual return';
+      document.getElementById('t1').textContent = fmt(1);
+      document.getElementById('t5').textContent = fmt(5);
+      document.getElementById('t10').textContent = fmt(10);
+      document.getElementById('t30').textContent = fmt(30);
+    }
+
+    document.querySelectorAll('.habit-btn').forEach((btn, i) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.habit-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateHeroCounter(i);
+      });
+    });
+
+    // Initialize counter when currency is ready
+    window.addEventListener('currencyChanged', () => {
+      const activeIdx = Array.from(document.querySelectorAll('.habit-btn')).findIndex(b => b.classList.contains('active'));
+      updateHeroCounter(activeIdx || 0);
+    });
+
+    // Initial load
+    setTimeout(() => updateHeroCounter(0), 500);
+  </script>
 </body>
 </html>

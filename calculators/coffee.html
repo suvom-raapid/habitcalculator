@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQ2XSHXJRT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GQ2XSHXJRT');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Calculate how much your daily coffee or energy drink habit costs over time. See weekly, monthly, yearly, and 5-year projections in any currency.">
+  <meta name="keywords" content="coffee cost calculator, daily coffee expense, coffee savings calculator, latte factor">
+  <title>Coffee & Drinks Cost Calculator | HabitCalculator</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    /* Calculator-specific styles */
+    .calc-page {
+      min-height: 100vh;
+      padding-top: 100px;
+    }
+
+    .calc-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 48px 80px;
+    }
+
+    .calc-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .calc-header h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(48px, 6vw, 80px);
+      line-height: 1;
+      margin-bottom: 16px;
+      letter-spacing: 0.02em;
+    }
+
+    .calc-header p {
+      font-size: 18px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .calc-form {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 48px;
+      margin-bottom: 32px;
+      position: relative;
+    }
+
+    .calc-form::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 3px; height: 100%;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-bottom: 32px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .form-group label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .form-group input,
+    .form-group select {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-family: 'Crimson Pro', serif;
+      font-size: 16px;
+      padding: 14px 18px;
+      outline: none;
+      transition: border-color 0.2s;
+      cursor: none;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: var(--gold);
+    }
+
+    .form-group select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23f0b429' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      cursor: none;
+    }
+
+    .form-group small {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--muted);
+      margin-top: 8px;
+      letter-spacing: 0.05em;
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--gold);
+      color: var(--bg);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 18px;
+      border: none;
+      cursor: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+
+    .submit-btn:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    /* Results */
+    .results-section {
+      display: none;
+      opacity: 0;
+      animation: fadeIn 0.4s ease forwards;
+    }
+
+    .results-section.show {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .results-highlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .results-highlight .label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .results-highlight .amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 8vw, 96px);
+      color: var(--gold);
+      line-height: 1;
+      letter-spacing: 0.02em;
+    }
+
+    .projections-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2px;
+      margin-bottom: 32px;
+    }
+
+    .projection-item {
+      background: var(--surface);
+      padding: 32px 24px;
+      text-align: center;
+      border: 1px solid var(--border);
+    }
+
+    .projection-item .period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .projection-item .value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      color: var(--text);
+      line-height: 1;
+    }
+
+    .savings-callout {
+      background: linear-gradient(135deg, rgba(6, 214, 160, 0.1) 0%, rgba(6, 214, 160, 0.05) 100%);
+      border-left: 3px solid var(--teal);
+      padding: 24px 32px;
+      margin-bottom: 32px;
+    }
+
+    .savings-callout h3 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 24px;
+      color: var(--teal);
+      margin-bottom: 8px;
+    }
+
+    .savings-callout p {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .info-panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 40px;
+      margin-top: 60px;
+    }
+
+    .info-panel h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      margin-bottom: 20px;
+      letter-spacing: 0.02em;
+    }
+
+    .info-panel p {
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+      font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      .calc-container {
+        padding: 0 24px 60px;
+      }
+
+      .calc-form {
+        padding: 32px 24px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .projections-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+
+  <!-- NAV -->
+  <nav>
+    <a href="../index.html" class="nav-logo">Habit<span>Calculator</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="coffee.html" class="active">Coffee</a></li>
+        <li><a href="../index.html#how">How It Works</a></li>
+      </ul>
+      <div class="currency-selector">
+        <label for="currencySelector">Currency</label>
+        <select id="currencySelector">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (€)</option>
+          <option value="GBP">GBP (£)</option>
+          <option value="INR">INR (₹)</option>
+          <option value="CAD">CAD (C$)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="JPY">JPY (¥)</option>
+          <option value="CNY">CNY (¥)</option>
+          <option value="CHF">CHF (Fr)</option>
+          <option value="SGD">SGD (S$)</option>
+          <option value="NZD">NZD (NZ$)</option>
+          <option value="ZAR">ZAR (R)</option>
+          <option value="BRL">BRL (R$)</option>
+          <option value="MXN">MXN (Mex$)</option>
+          <option value="KRW">KRW (₩)</option>
+        </select>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CALCULATOR PAGE -->
+  <div class="calc-page">
+    <div class="calc-container">
+      <div class="calc-header fade-up">
+        <h1>☕ Coffee & Drinks Calculator</h1>
+        <p>Calculate the true cost of your daily coffee or energy drink habit</p>
+      </div>
+
+      <form class="calc-form fade-up" id="coffeeForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>Type of Drink</label>
+            <select id="drinkType" required>
+              <option value="">Select drink type</option>
+              <option value="coffee">Coffee (Latte, Cappuccino, etc.)</option>
+              <option value="espresso">Espresso Shot</option>
+              <option value="energy">Energy Drink</option>
+              <option value="soda">Soda / Soft Drink</option>
+              <option value="tea">Specialty Tea</option>
+              <option value="custom">Custom Drink</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Cost per Drink <span id="currencyLabel"></span></label>
+            <input
+              type="number"
+              id="costPerDrink"
+              placeholder="5.00"
+              step="0.01"
+              min="0.01"
+              required
+            >
+            <small>Average cost of one drink in your currency</small>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>How many per day?</label>
+            <input
+              type="number"
+              id="frequency"
+              placeholder="1"
+              min="1"
+              max="20"
+              value="1"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label>Days per week</label>
+            <select id="daysPerWeek" required>
+              <option value="7">Every day (7 days)</option>
+              <option value="6">6 days a week</option>
+              <option value="5" selected>Weekdays only (5 days)</option>
+              <option value="4">4 days a week</option>
+              <option value="3">3 days a week</option>
+              <option value="2">2 days a week</option>
+              <option value="1">Once a week</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Calculate My Spending</button>
+      </form>
+
+      <div class="results-section" id="results">
+        <div class="results-highlight">
+          <div class="label">Your Daily Average Spending</div>
+          <div class="amount" id="dailyAmount">$0.00</div>
+        </div>
+
+        <div class="projections-grid">
+          <div class="projection-item">
+            <div class="period">Weekly</div>
+            <div class="value" id="weeklyCost">$0.00</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">Monthly</div>
+            <div class="value" id="monthlyCost">$0.00</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">Yearly</div>
+            <div class="value" id="yearlyCost">$0.00</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">5 Years</div>
+            <div class="value" id="fiveYearCost">$0.00</div>
+          </div>
+        </div>
+
+        <div class="savings-callout">
+          <h3>💰 Savings Opportunity</h3>
+          <p>By reducing or eliminating this habit, you could save <strong id="savingsAmount">$0</strong> per year. That's enough for a vacation, emergency fund, or investment opportunity!</p>
+        </div>
+      </div>
+
+      <div class="info-panel fade-up">
+        <h2>Understanding Your Coffee Costs</h2>
+        <p>
+          The "latte factor" is a term coined by financial author David Bach, referring to the small, regular purchases
+          we make without thinking that add up to significant amounts over time. A daily $5 coffee might seem insignificant,
+          but over a year, it can cost you over $1,800.
+        </p>
+        <p>
+          This calculator helps you visualize the true cost of your coffee or drink habit. Use these insights to make
+          informed decisions about your spending. Even small changes, like making coffee at home a few days a week,
+          can lead to substantial savings over time.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">Habit<span>Calculator</span></div>
+    <p class="footer-copy">© 2026 HabitCalculator — Every day counts.</p>
+    <ul class="footer-links">
+      <li><a href="../index.html#categories">Calculators</a></li>
+      <li><a href="../index.html#how">How It Works</a></li>
+      <li><a href="#">Privacy</a></li>
+    </ul>
+  </footer>
+
+  <script src="../js/currency.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // Store last calculation for currency conversion
+    let lastCalculation = null;
+
+    function updateCurrencyLabel() {
+      const currencyInfo = CurrencyManager.getCurrentCurrency();
+      document.getElementById('currencyLabel').textContent = `(${currencyInfo.code})`;
+    }
+
+    function updateResults() {
+      if (!lastCalculation) return;
+
+      const { dailyAverage, weekly, monthly, yearly, fiveYear } = lastCalculation;
+
+      // Format all amounts using CurrencyManager
+      document.getElementById('dailyAmount').textContent = CurrencyManager.format(dailyAverage);
+      document.getElementById('weeklyCost').textContent = CurrencyManager.format(weekly);
+      document.getElementById('monthlyCost').textContent = CurrencyManager.format(monthly);
+      document.getElementById('yearlyCost').textContent = CurrencyManager.format(yearly);
+      document.getElementById('fiveYearCost').textContent = CurrencyManager.format(fiveYear);
+      document.getElementById('savingsAmount').textContent = CurrencyManager.format(yearly, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    // Listen for currency changes
+    window.addEventListener('currencyChanged', function() {
+      updateCurrencyLabel();
+      updateResults();
+    });
+
+    // Update label when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      setTimeout(updateCurrencyLabel, 100);
+    });
+
+    // Form submission
+    document.getElementById('coffeeForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const costPerDrink = parseFloat(document.getElementById('costPerDrink').value);
+      const frequency = parseInt(document.getElementById('frequency').value);
+      const daysPerWeek = parseInt(document.getElementById('daysPerWeek').value);
+
+      // Calculate in base currency (assumes user entered in their selected currency)
+      const dailyAverage = (costPerDrink * frequency * daysPerWeek) / 7;
+      const weekly = costPerDrink * frequency * daysPerWeek;
+      const monthly = dailyAverage * 30;
+      const yearly = dailyAverage * 365;
+      const fiveYear = yearly * 5;
+
+      // Store calculation
+      lastCalculation = { dailyAverage, weekly, monthly, yearly, fiveYear };
+
+      // Update UI
+      updateResults();
+
+      // Show results with animation
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.classList.add('show');
+      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    // Update placeholder based on drink type
+    document.getElementById('drinkType').addEventListener('change', function(e) {
+      const costInput = document.getElementById('costPerDrink');
+      const suggestions = {
+        'coffee': '5.00',
+        'espresso': '3.50',
+        'energy': '3.00',
+        'soda': '2.00',
+        'tea': '4.50',
+        'custom': '5.00'
+      };
+      costInput.placeholder = suggestions[e.target.value] || '5.00';
+    });
+  </script>
+</body>
+</html>
