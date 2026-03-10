@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQ2XSHXJRT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GQ2XSHXJRT');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free subscription cost calculator. Add up all your monthly subscriptions - Netflix, Spotify, gym, cloud storage, apps - and see the shocking annual total. Track recurring expenses.">
+  <meta name="keywords" content="subscription cost calculator, monthly subscription tracker, how much do subscriptions cost, Netflix cost per year, streaming cost calculator, recurring expense calculator">
+  <meta name="author" content="HabitCalculator">
+  <link rel="canonical" href="https://habitcalculator.com/calculators/subscriptions.html">
+
+  <meta property="og:title" content="Subscription Cost Calculator | HabitCalculator">
+  <meta property="og:description" content="Add up all your monthly subscriptions and see the annual cost. Netflix, Spotify, gym, apps, and more.">
+  <meta property="og:url" content="https://habitcalculator.com/calculators/subscriptions.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="HabitCalculator">
+
+  <title>Subscription Cost Calculator - Track Monthly Subscriptions | HabitCalculator</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Subscription Cost Calculator",
+    "url": "https://habitcalculator.com/calculators/subscriptions.html",
+    "description": "Add up all your monthly subscriptions and see the total annual cost of streaming, music, gym, apps, and other recurring expenses.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    .calc-page { min-height: 100vh; padding-top: 100px; }
+    .calc-container { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+    .calc-header { text-align: center; margin-bottom: 60px; }
+    .calc-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); line-height: 1; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .calc-header p { font-size: 18px; color: var(--muted); font-style: italic; }
+    .calc-form { background: var(--surface); border: 1px solid var(--border); padding: 48px; margin-bottom: 32px; position: relative; }
+    .calc-form::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--gold), transparent); }
+    .sub-list { margin-bottom: 32px; }
+    .sub-row { display: grid; grid-template-columns: 1fr 120px 40px; gap: 16px; margin-bottom: 12px; align-items: end; }
+    .sub-row .form-group { margin-bottom: 0; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .form-group input, .form-group select { background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Crimson Pro', serif; font-size: 16px; padding: 14px 18px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus { border-color: var(--gold); }
+    .remove-btn { background: transparent; border: 1px solid var(--border); color: var(--red); font-size: 18px; padding: 14px; transition: all 0.2s; font-family: monospace; line-height: 1; }
+    .remove-btn:hover { border-color: var(--red); background: rgba(239,35,60,0.1); }
+    .add-btn { background: transparent; border: 1px solid var(--border); color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 0.1em; padding: 14px 24px; transition: all 0.2s; text-transform: uppercase; width: 100%; margin-bottom: 32px; }
+    .add-btn:hover { border-color: var(--gold); background: rgba(240,180,41,0.05); }
+    .submit-btn { width: 100%; background: var(--gold); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px; border: none; transition: background 0.2s, transform 0.15s; }
+    .submit-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+    .results-section { display: none; }
+    .results-section.show { display: block; animation: fadeIn 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .results-highlight { background: var(--surface); border: 1px solid var(--border); padding: 40px; text-align: center; margin-bottom: 32px; }
+    .results-highlight .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .results-highlight .amount { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 96px); color: var(--gold); line-height: 1; }
+    .projections-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-bottom: 32px; }
+    .projection-item { background: var(--surface); padding: 32px 24px; text-align: center; border: 1px solid var(--border); }
+    .projection-item .period { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .projection-item .value { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--text); line-height: 1; }
+    .sub-breakdown { background: var(--surface); border: 1px solid var(--border); padding: 32px; margin-bottom: 32px; }
+    .sub-breakdown h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; margin-bottom: 20px; }
+    .breakdown-row { display: flex; justify-content: space-between; padding: 12px 0; border-bottom: 1px solid var(--border); font-size: 15px; }
+    .breakdown-row:last-child { border-bottom: none; }
+    .breakdown-name { color: var(--text); }
+    .breakdown-cost { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--gold); }
+    .savings-callout { background: linear-gradient(135deg, rgba(6, 214, 160, 0.1) 0%, rgba(6, 214, 160, 0.05) 100%); border-left: 3px solid var(--teal); padding: 24px 32px; margin-bottom: 32px; }
+    .savings-callout h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--teal); margin-bottom: 8px; }
+    .savings-callout p { font-size: 15px; color: var(--text); line-height: 1.6; font-style: italic; }
+    .info-panel { background: var(--surface); border: 1px solid var(--border); padding: 40px; margin-top: 60px; }
+    .info-panel h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 20px; letter-spacing: 0.02em; }
+    .info-panel p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; font-style: italic; }
+    .presets { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+    .preset-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 6px 14px; transition: all 0.2s; }
+    .preset-btn:hover { border-color: var(--gold); color: var(--gold); }
+    @media (max-width: 768px) {
+      .calc-container { padding: 0 24px 60px; }
+      .calc-form { padding: 32px 24px; }
+      .sub-row { grid-template-columns: 1fr 100px 40px; gap: 8px; }
+      .projections-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html">Home</a>
+    <a href="coffee.html">Coffee Calculator</a>
+    <a href="smoking.html">Smoking Calculator</a>
+    <a href="subscriptions.html">Subscription Calculator</a>
+    <a href="savings.html">Savings Calculator</a>
+    <a href="dining.html">Dining Out Calculator</a>
+  </div>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Habit<span>Calculator</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="coffee.html">Coffee</a></li>
+        <li><a href="subscriptions.html" class="active">Subscriptions</a></li>
+        <li><a href="savings.html">Savings</a></li>
+        <li><a href="../index.html#how">How It Works</a></li>
+      </ul>
+      <div class="currency-selector">
+        <label for="currencySelector">Currency</label>
+        <select id="currencySelector">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (&euro;)</option>
+          <option value="GBP">GBP (&pound;)</option>
+          <option value="INR">INR (&#8377;)</option>
+          <option value="CAD">CAD (C$)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="JPY">JPY (&yen;)</option>
+          <option value="CNY">CNY (&yen;)</option>
+          <option value="CHF">CHF (Fr)</option>
+          <option value="SGD">SGD (S$)</option>
+          <option value="NZD">NZD (NZ$)</option>
+          <option value="ZAR">ZAR (R)</option>
+          <option value="BRL">BRL (R$)</option>
+          <option value="MXN">MXN (Mex$)</option>
+          <option value="KRW">KRW (&#8361;)</option>
+        </select>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="calc-page">
+    <div class="calc-container">
+      <div class="calc-header fade-up">
+        <h1>Subscription Cost Calculator</h1>
+        <p>Add up all your monthly subscriptions and see the total annual cost</p>
+      </div>
+
+      <div class="calc-form fade-up" id="subForm">
+        <div class="form-group" style="margin-bottom: 20px;">
+          <label>Quick Add Popular Services</label>
+        </div>
+        <div class="presets">
+          <button class="preset-btn" type="button" data-name="Netflix" data-cost="15.49">Netflix</button>
+          <button class="preset-btn" type="button" data-name="Spotify" data-cost="10.99">Spotify</button>
+          <button class="preset-btn" type="button" data-name="YouTube Premium" data-cost="13.99">YouTube</button>
+          <button class="preset-btn" type="button" data-name="Disney+" data-cost="13.99">Disney+</button>
+          <button class="preset-btn" type="button" data-name="Amazon Prime" data-cost="14.99">Prime</button>
+          <button class="preset-btn" type="button" data-name="HBO Max" data-cost="15.99">HBO Max</button>
+          <button class="preset-btn" type="button" data-name="Apple Music" data-cost="10.99">Apple Music</button>
+          <button class="preset-btn" type="button" data-name="iCloud+" data-cost="2.99">iCloud+</button>
+          <button class="preset-btn" type="button" data-name="Gym Membership" data-cost="40.00">Gym</button>
+          <button class="preset-btn" type="button" data-name="ChatGPT Plus" data-cost="20.00">ChatGPT</button>
+          <button class="preset-btn" type="button" data-name="Adobe Creative" data-cost="54.99">Adobe</button>
+          <button class="preset-btn" type="button" data-name="Microsoft 365" data-cost="9.99">Office 365</button>
+        </div>
+
+        <div class="sub-list" id="subList">
+          <div class="sub-row">
+            <div class="form-group">
+              <label>Service Name</label>
+              <input type="text" placeholder="Netflix, Spotify, Gym..." class="sub-name">
+            </div>
+            <div class="form-group">
+              <label>Monthly <span class="currency-code"></span></label>
+              <input type="number" placeholder="15.00" step="0.01" min="0.01" class="sub-cost">
+            </div>
+            <button type="button" class="remove-btn" title="Remove">&times;</button>
+          </div>
+        </div>
+
+        <button type="button" class="add-btn" id="addSubBtn">+ Add Another Subscription</button>
+        <button type="button" class="submit-btn" id="calculateBtn">Calculate Total Cost</button>
+      </div>
+
+      <div class="results-section" id="results">
+        <div class="results-highlight">
+          <div class="label">Your Total Annual Subscription Cost</div>
+          <div class="amount" id="yearlyAmount">&mdash;</div>
+        </div>
+        <div class="projections-grid">
+          <div class="projection-item">
+            <div class="period">Monthly Total</div>
+            <div class="value" id="monthlyTotal">&mdash;</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">Daily Cost</div>
+            <div class="value" id="dailyTotal">&mdash;</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">5-Year Total</div>
+            <div class="value" id="fiveYearTotal">&mdash;</div>
+          </div>
+        </div>
+        <div class="sub-breakdown" id="breakdown">
+          <h3>Cost Breakdown (Annual)</h3>
+        </div>
+        <div class="savings-callout">
+          <h3>Savings Tip</h3>
+          <p>Review your subscriptions regularly. Studies show the average person pays for <strong>3-4 subscriptions they rarely use</strong>. Cutting just one unused subscription saves you <strong id="saveTip">&mdash;</strong> per year.</p>
+        </div>
+      </div>
+
+      <div class="info-panel fade-up">
+        <h2>The Hidden Cost of Subscriptions</h2>
+        <p>
+          The average American spends $219 per month on subscription services — that's over $2,600 per year. Many people underestimate their subscription spending by 2-3x because these small, automatic charges fly under the radar.
+        </p>
+        <p>
+          Common subscriptions include streaming services (Netflix, Hulu, Disney+), music (Spotify, Apple Music), cloud storage (iCloud, Google One), productivity tools (Microsoft 365, Adobe), fitness (gym memberships, Peloton), and food delivery (DoorDash, UberEats passes).
+        </p>
+        <p>
+          A good practice is to audit your subscriptions every quarter. Cancel anything you haven't used in the past 30 days. Even cutting 2-3 unused subscriptions can save you $500-$1,000 per year.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Habit<span>Calculator</span></div>
+    <p class="footer-copy">&copy; 2026 HabitCalculator — Every day counts.</p>
+    <ul class="footer-links">
+      <li><a href="../index.html#categories">Calculators</a></li>
+      <li><a href="../index.html#how">How It Works</a></li>
+      <li><a href="../privacy.html">Privacy Policy</a></li>
+    </ul>
+  </footer>
+
+  <script src="../js/currency.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    function fmt(amount) {
+      if (!window.CurrencyManager || !CurrencyManager.ready) return '$' + amount.toFixed(2);
+      return CurrencyManager.formatLocal(amount);
+    }
+    function fmtShort(amount) {
+      if (!window.CurrencyManager || !CurrencyManager.ready) return '$' + Math.round(amount);
+      return CurrencyManager.formatLocal(amount, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    function updateCurrencyUI() {
+      if (!window.CurrencyManager || !CurrencyManager.ready) return;
+      // Update preset button labels with localized costs
+      document.querySelectorAll('.preset-btn').forEach(function(btn) {
+        var usdCost = parseFloat(btn.dataset.costusd || btn.dataset.cost);
+        if (!btn.dataset.costusd) btn.dataset.costusd = btn.dataset.cost; // save original USD
+        var localCost = CurrencyManager.localizeDefault(usdCost);
+        btn.dataset.cost = localCost;
+      });
+      // Update cost placeholder in existing rows
+      document.querySelectorAll('.sub-cost').forEach(function(input) {
+        input.placeholder = CurrencyManager.localizeDefault(15);
+      });
+      // Update the "Monthly" column label with currency symbol
+      document.querySelectorAll('.currency-code').forEach(function(el) {
+        el.textContent = '(' + CurrencyManager.getSymbol() + ')';
+      });
+    }
+
+    function addSubRow(name, cost) {
+      var list = document.getElementById('subList');
+      var row = document.createElement('div');
+      row.className = 'sub-row';
+      var placeholder = '15.00';
+      if (window.CurrencyManager && CurrencyManager.ready) {
+        placeholder = CurrencyManager.localizeDefault(15);
+      }
+      row.innerHTML = '<div class="form-group"><input type="text" placeholder="Service name" class="sub-name" value="' + (name || '') + '"></div>' +
+        '<div class="form-group"><input type="number" placeholder="' + placeholder + '" step="0.01" min="0.01" class="sub-cost" value="' + (cost || '') + '"></div>' +
+        '<button type="button" class="remove-btn" title="Remove">&times;</button>';
+      list.appendChild(row);
+      row.querySelector('.remove-btn').addEventListener('click', function() {
+        if (list.children.length > 1) row.remove();
+      });
+    }
+
+    document.getElementById('addSubBtn').addEventListener('click', function() {
+      addSubRow('', '');
+    });
+
+    document.querySelector('.remove-btn').addEventListener('click', function() {
+      var list = document.getElementById('subList');
+      if (list.children.length > 1) this.closest('.sub-row').remove();
+    });
+
+    // Preset buttons — convert USD cost to local currency when clicked
+    document.querySelectorAll('.preset-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var name = btn.dataset.name;
+        var cost = btn.dataset.cost;
+        var emptyRow = null;
+        document.querySelectorAll('.sub-name').forEach(function(input) {
+          if (!input.value && !emptyRow) emptyRow = input.closest('.sub-row');
+        });
+        if (emptyRow) {
+          emptyRow.querySelector('.sub-name').value = name;
+          emptyRow.querySelector('.sub-cost').value = cost;
+        } else {
+          addSubRow(name, cost);
+        }
+      });
+    });
+
+    document.getElementById('calculateBtn').addEventListener('click', function() {
+      var subs = [];
+      var totalMonthly = 0;
+      document.querySelectorAll('.sub-row').forEach(function(row) {
+        var name = row.querySelector('.sub-name').value.trim();
+        var cost = parseFloat(row.querySelector('.sub-cost').value);
+        if (name && !isNaN(cost) && cost > 0) {
+          subs.push({ name: name, monthly: cost });
+          totalMonthly += cost;
+        }
+      });
+      if (subs.length === 0) return;
+      var yearly = totalMonthly * 12;
+      var daily = totalMonthly / 30;
+      var fiveYear = yearly * 5;
+      document.getElementById('monthlyTotal').textContent = fmt(totalMonthly);
+      document.getElementById('yearlyAmount').textContent = fmtShort(yearly);
+      document.getElementById('dailyTotal').textContent = fmt(daily);
+      document.getElementById('fiveYearTotal').textContent = fmtShort(fiveYear);
+      var breakdownDiv = document.getElementById('breakdown');
+      breakdownDiv.innerHTML = '<h3>Cost Breakdown (Annual)</h3>';
+      subs.sort(function(a, b) { return b.monthly - a.monthly; });
+      subs.forEach(function(sub) {
+        var row = document.createElement('div');
+        row.className = 'breakdown-row';
+        row.innerHTML = '<span class="breakdown-name">' + sub.name + '</span><span class="breakdown-cost">' + fmt(sub.monthly) + '/mo = ' + fmtShort(sub.monthly * 12) + '/yr</span>';
+        breakdownDiv.appendChild(row);
+      });
+      document.getElementById('saveTip').textContent = fmtShort(CurrencyManager.ready ? CurrencyManager.localizeDefault(15) * 12 : 180);
+      var resultsDiv = document.getElementById('results');
+      resultsDiv.classList.add('show');
+      resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    });
+
+    window.addEventListener('currencyReady', updateCurrencyUI);
+    window.addEventListener('currencyChanged', function() {
+      updateCurrencyUI();
+      // Clear all entered values since currency changed
+      document.querySelectorAll('.sub-cost').forEach(function(input) { input.value = ''; });
+      document.getElementById('results').classList.remove('show');
+    });
+  </script>
+</body>
+</html>

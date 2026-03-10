@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GQ2XSHXJRT"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-GQ2XSHXJRT');
+  </script>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Free daily savings calculator with compound interest. See how saving $1, $5, or $10 per day grows over 1, 5, 10, 20, and 30 years with compound interest at any rate.">
+  <meta name="keywords" content="daily savings calculator, compound interest calculator, how much does saving per day grow, investment growth calculator, savings goal calculator, $5 a day savings">
+  <meta name="author" content="HabitCalculator">
+  <link rel="canonical" href="https://habitcalculator.com/calculators/savings.html">
+
+  <meta property="og:title" content="Daily Savings & Compound Interest Calculator | HabitCalculator">
+  <meta property="og:description" content="See how saving just a few dollars a day grows with compound interest over time. Free calculator with adjustable rates and time periods.">
+  <meta property="og:url" content="https://habitcalculator.com/calculators/savings.html">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="HabitCalculator">
+
+  <title>Daily Savings Calculator - How Much Does $5/Day Grow? | HabitCalculator</title>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Daily Savings & Compound Interest Calculator",
+    "url": "https://habitcalculator.com/calculators/savings.html",
+    "description": "Calculate how daily savings grow with compound interest over time. See projections for 1, 5, 10, 20, and 30 years.",
+    "applicationCategory": "FinanceApplication",
+    "operatingSystem": "Any",
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How much is $5 a day in 10 years with compound interest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Saving $5 per day ($1,825/year) at a 7% annual return grows to approximately $25,518 in 10 years. Without interest, you'd only have $18,250. That's an extra $7,268 from compound interest alone."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much is $10 a day for 30 years?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Saving $10 per day at 7% annual return for 30 years grows to approximately $370,191. Without compound interest, you'd have $109,500. Compound interest more than triples your money."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the best daily savings amount to start with?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with whatever you can afford consistently. Even $1/day ($365/year) at 7% grows to $5,103 in 10 years and $37,019 in 30 years. The key is consistency - time in the market matters more than the amount."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/theme.css">
+  <style>
+    .calc-page { min-height: 100vh; padding-top: 100px; }
+    .calc-container { max-width: 900px; margin: 0 auto; padding: 0 48px 80px; }
+    .calc-header { text-align: center; margin-bottom: 60px; }
+    .calc-header h1 { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); line-height: 1; margin-bottom: 16px; letter-spacing: 0.02em; }
+    .calc-header p { font-size: 18px; color: var(--muted); font-style: italic; }
+    .calc-form { background: var(--surface); border: 1px solid var(--border); padding: 48px; margin-bottom: 32px; position: relative; }
+    .calc-form::before { content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 100%; background: linear-gradient(to bottom, var(--teal), transparent); }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 32px; }
+    .form-group { display: flex; flex-direction: column; }
+    .form-group label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .form-group input, .form-group select { background: var(--bg); border: 1px solid var(--border); color: var(--text); font-family: 'Crimson Pro', serif; font-size: 16px; padding: 14px 18px; outline: none; transition: border-color 0.2s; }
+    .form-group input:focus, .form-group select:focus { border-color: var(--gold); }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23f0b429' d='M1 1l5 5 5-5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
+    .form-group small { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); margin-top: 8px; letter-spacing: 0.05em; }
+    .quick-amounts { display: flex; gap: 8px; margin-bottom: 32px; flex-wrap: wrap; }
+    .quick-btn { background: transparent; border: 1px solid var(--border); color: var(--muted); font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 8px 16px; transition: all 0.2s; }
+    .quick-btn:hover, .quick-btn.active { border-color: var(--teal); color: var(--teal); background: rgba(6,214,160,0.05); }
+    .submit-btn { width: 100%; background: var(--teal); color: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 18px; border: none; transition: background 0.2s, transform 0.15s; }
+    .submit-btn:hover { background: #05c896; transform: translateY(-2px); }
+    .results-section { display: none; }
+    .results-section.show { display: block; animation: fadeIn 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    .results-highlight { background: var(--surface); border: 1px solid var(--border); padding: 40px; text-align: center; margin-bottom: 32px; }
+    .results-highlight .label { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .results-highlight .amount { font-family: 'Bebas Neue', sans-serif; font-size: clamp(56px, 8vw, 96px); color: var(--teal); line-height: 1; }
+    .results-highlight .sub { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); margin-top: 12px; letter-spacing: 0.05em; }
+    .projections-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 2px; margin-bottom: 32px; }
+    .projection-item { background: var(--surface); padding: 32px 16px; text-align: center; border: 1px solid var(--border); }
+    .projection-item .period { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
+    .projection-item .value { font-family: 'Bebas Neue', sans-serif; font-size: 28px; color: var(--text); line-height: 1; margin-bottom: 6px; }
+    .projection-item .deposited { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--muted); }
+    .interest-callout { background: linear-gradient(135deg, rgba(6, 214, 160, 0.1) 0%, rgba(6, 214, 160, 0.05) 100%); border-left: 3px solid var(--teal); padding: 24px 32px; margin-bottom: 32px; }
+    .interest-callout h3 { font-family: 'Bebas Neue', sans-serif; font-size: 24px; color: var(--teal); margin-bottom: 8px; }
+    .interest-callout p { font-size: 15px; color: var(--text); line-height: 1.6; font-style: italic; }
+    .info-panel { background: var(--surface); border: 1px solid var(--border); padding: 40px; margin-top: 60px; }
+    .info-panel h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; margin-bottom: 20px; letter-spacing: 0.02em; }
+    .info-panel p { color: var(--muted); line-height: 1.8; margin-bottom: 16px; font-style: italic; }
+    @media (max-width: 768px) {
+      .calc-container { padding: 0 24px 60px; }
+      .calc-form { padding: 32px 24px; }
+      .form-row { grid-template-columns: 1fr; gap: 24px; }
+      .projections-grid { grid-template-columns: repeat(2, 1fr); }
+      .projection-item:last-child { grid-column: span 2; }
+    }
+    @media (max-width: 480px) {
+      .projections-grid { grid-template-columns: 1fr; }
+      .projection-item:last-child { grid-column: span 1; }
+    }
+  </style>
+</head>
+<body>
+  <div id="cursor"></div>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html">Home</a>
+    <a href="coffee.html">Coffee Calculator</a>
+    <a href="smoking.html">Smoking Calculator</a>
+    <a href="subscriptions.html">Subscription Calculator</a>
+    <a href="savings.html">Savings Calculator</a>
+    <a href="dining.html">Dining Out Calculator</a>
+  </div>
+
+  <nav>
+    <a href="../index.html" class="nav-logo">Habit<span>Calculator</span></a>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="coffee.html">Coffee</a></li>
+        <li><a href="smoking.html">Smoking</a></li>
+        <li><a href="savings.html" class="active">Savings</a></li>
+        <li><a href="../index.html#how">How It Works</a></li>
+      </ul>
+      <div class="currency-selector">
+        <label for="currencySelector">Currency</label>
+        <select id="currencySelector">
+          <option value="USD">USD ($)</option>
+          <option value="EUR">EUR (&euro;)</option>
+          <option value="GBP">GBP (&pound;)</option>
+          <option value="INR">INR (&#8377;)</option>
+          <option value="CAD">CAD (C$)</option>
+          <option value="AUD">AUD (A$)</option>
+          <option value="JPY">JPY (&yen;)</option>
+          <option value="CNY">CNY (&yen;)</option>
+          <option value="CHF">CHF (Fr)</option>
+          <option value="SGD">SGD (S$)</option>
+          <option value="NZD">NZD (NZ$)</option>
+          <option value="ZAR">ZAR (R)</option>
+          <option value="BRL">BRL (R$)</option>
+          <option value="MXN">MXN (Mex$)</option>
+          <option value="KRW">KRW (&#8361;)</option>
+        </select>
+      </div>
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="calc-page">
+    <div class="calc-container">
+      <div class="calc-header fade-up">
+        <h1>Daily Savings Calculator</h1>
+        <p>See how small daily savings grow into serious wealth with compound interest</p>
+      </div>
+
+      <form class="calc-form fade-up" id="savingsForm">
+        <div class="form-group" style="margin-bottom: 16px;">
+          <label>Quick Select Daily Amount</label>
+        </div>
+        <div class="quick-amounts">
+          <button type="button" class="quick-btn" data-amount="1">1/day</button>
+          <button type="button" class="quick-btn active" data-amount="5">5/day</button>
+          <button type="button" class="quick-btn" data-amount="10">10/day</button>
+          <button type="button" class="quick-btn" data-amount="20">20/day</button>
+          <button type="button" class="quick-btn" data-amount="50">50/day</button>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label>Daily Savings Amount <span id="currencyLabel"></span></label>
+            <input type="number" id="dailyAmount" placeholder="5.00" step="0.01" min="0.01" value="5" required>
+            <small>How much you save or invest each day</small>
+          </div>
+          <div class="form-group">
+            <label>Annual Return Rate (%)</label>
+            <select id="returnRate" required>
+              <option value="0">0% (No interest / mattress savings)</option>
+              <option value="2">2% (Savings account)</option>
+              <option value="4">4% (Bonds / CDs)</option>
+              <option value="5">5% (Conservative investing)</option>
+              <option value="7" selected>7% (S&P 500 average)</option>
+              <option value="10">10% (Aggressive growth)</option>
+              <option value="12">12% (High risk)</option>
+            </select>
+          </div>
+        </div>
+
+        <button type="submit" class="submit-btn">Calculate Growth</button>
+      </form>
+
+      <div class="results-section" id="results">
+        <div class="results-highlight">
+          <div class="label">Your savings after 10 years</div>
+          <div class="amount" id="tenYearAmount">—</div>
+          <div class="sub" id="interestEarned">Interest earned: —</div>
+        </div>
+        <div class="projections-grid">
+          <div class="projection-item">
+            <div class="period">1 Year</div>
+            <div class="value" id="val1">—</div>
+            <div class="deposited" id="dep1">deposited: —</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">5 Years</div>
+            <div class="value" id="val5">—</div>
+            <div class="deposited" id="dep5">deposited: —</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">10 Years</div>
+            <div class="value" id="val10">—</div>
+            <div class="deposited" id="dep10">deposited: —</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">20 Years</div>
+            <div class="value" id="val20">—</div>
+            <div class="deposited" id="dep20">deposited: —</div>
+          </div>
+          <div class="projection-item">
+            <div class="period">30 Years</div>
+            <div class="value" id="val30">—</div>
+            <div class="deposited" id="dep30">deposited: —</div>
+          </div>
+        </div>
+        <div class="interest-callout">
+          <h3>The Power of Compound Interest</h3>
+          <p>You deposited <strong id="totalDeposited">—</strong> over 30 years, but your account grew to <strong id="totalGrown">—</strong>. That means <strong id="interestPercent">0%</strong> of your final balance came from compound interest alone!</p>
+        </div>
+      </div>
+
+      <div class="info-panel fade-up">
+        <h2>How Daily Savings Compound Over Time</h2>
+        <p>
+          Compound interest is often called the "eighth wonder of the world." When you save or invest a small amount every day, you earn returns not just on your deposits, but on all the interest that has accumulated over time. This creates an exponential growth curve.
+        </p>
+        <p>
+          For example, saving $5 per day at 7% annual return (the historical average of the S&P 500) gives you approximately $25,518 after 10 years. But after 30 years, that same $5/day grows to $185,095 — even though you only deposited $54,750 total. The remaining $130,345 came entirely from compound interest.
+        </p>
+        <p>
+          The key is starting early. A 25-year-old who saves $5/day until 65 will have far more than a 35-year-old who saves $10/day until 65, even though the 35-year-old deposits more money. Time is the most powerful variable in compound interest.
+        </p>
+        <p>
+          Whether you save in a high-yield savings account (2-5%), index funds (7-10%), or bonds (3-5%), the principle remains the same: consistency beats amount, and time beats everything.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-logo">Habit<span>Calculator</span></div>
+    <p class="footer-copy">&copy; 2026 HabitCalculator — Every day counts.</p>
+    <ul class="footer-links">
+      <li><a href="../index.html#categories">Calculators</a></li>
+      <li><a href="../index.html#how">How It Works</a></li>
+      <li><a href="../privacy.html">Privacy Policy</a></li>
+    </ul>
+  </footer>
+
+  <script src="../js/currency.js"></script>
+  <script src="../js/main.js"></script>
+  <script>
+    // USD base amounts for quick buttons
+    var quickAmountsUSD = [1, 5, 10, 20, 50];
+
+    function fmtShort(amount) {
+      if (!window.CurrencyManager || !CurrencyManager.ready) return '$' + Math.round(amount).toLocaleString();
+      return CurrencyManager.formatLocal(amount, { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+    }
+
+    function updateCurrencyUI() {
+      if (!window.CurrencyManager || !CurrencyManager.ready) return;
+      document.getElementById('currencyLabel').textContent = '(' + CurrencyManager.getSymbol() + ')';
+      // Update quick button labels and values to local currency
+      var btns = document.querySelectorAll('.quick-btn');
+      btns.forEach(function(btn, i) {
+        var usd = quickAmountsUSD[i];
+        var local = CurrencyManager.localizeDefault(usd);
+        btn.textContent = CurrencyManager.getSymbol() + local + '/day';
+        btn.dataset.amount = local;
+      });
+      // Update placeholder
+      document.getElementById('dailyAmount').placeholder = CurrencyManager.localizeDefault(5);
+      // Update value if it matches a previous default
+      var currentVal = parseFloat(document.getElementById('dailyAmount').value);
+      if (!currentVal || currentVal === 5) {
+        document.getElementById('dailyAmount').value = CurrencyManager.localizeDefault(5);
+      }
+    }
+
+    function calcFV(daily, years, rate) {
+      if (rate === 0) return daily * 365 * years;
+      var r = rate / 365;
+      var n = years * 365;
+      return daily * ((Math.pow(1 + r, n) - 1) / r);
+    }
+
+    function calculate() {
+      var daily = parseFloat(document.getElementById('dailyAmount').value);
+      var rate = parseFloat(document.getElementById('returnRate').value) / 100;
+      if (isNaN(daily) || daily <= 0) return;
+
+      [1, 5, 10, 20, 30].forEach(function(y) {
+        var fv = calcFV(daily, y, rate);
+        var dep = daily * 365 * y;
+        document.getElementById('val' + y).textContent = fmtShort(fv);
+        document.getElementById('dep' + y).textContent = 'deposited: ' + fmtShort(dep);
+      });
+
+      var fv10 = calcFV(daily, 10, rate);
+      var dep10total = daily * 365 * 10;
+      document.getElementById('tenYearAmount').textContent = fmtShort(fv10);
+      document.getElementById('interestEarned').textContent = 'Interest earned: ' + fmtShort(fv10 - dep10total);
+
+      var fv30 = calcFV(daily, 30, rate);
+      var dep30total = daily * 365 * 30;
+      document.getElementById('totalDeposited').textContent = fmtShort(dep30total);
+      document.getElementById('totalGrown').textContent = fmtShort(fv30);
+      var interestPct = dep30total > 0 ? Math.round(((fv30 - dep30total) / fv30) * 100) : 0;
+      document.getElementById('interestPercent').textContent = interestPct + '%';
+
+      document.getElementById('results').classList.add('show');
+      document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    document.querySelectorAll('.quick-btn').forEach(function(btn, i) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.quick-btn').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        document.getElementById('dailyAmount').value = btn.dataset.amount;
+      });
+    });
+
+    document.getElementById('savingsForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      calculate();
+    });
+
+    window.addEventListener('currencyReady', updateCurrencyUI);
+    window.addEventListener('currencyChanged', function() {
+      updateCurrencyUI();
+      document.getElementById('results').classList.remove('show');
+    });
+  </script>
+</body>
+</html>
